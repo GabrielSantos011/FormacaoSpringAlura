@@ -1,0 +1,14 @@
+1.ter jdk
+2.ter o eclipse para java ee
+3.baixar o apache tomcat, nestes projetos estou usando o 10
+4.no eclipse ir para aba servers e adicionar um novo -
+Apache > tomcat da sua versão > next > selecionar onde o tomcat foi baixado > finish 
+5.tomcat é um servidor web, ou seja, ele entende o protocolo http, gera html e entende o java
+a porta padrão é a 8080, portanto ao iniciar o servidor vc pode acessar no http://localhost:8080
+6.criar um dynamic web poject
+7.caso tenha dado um erro no web.xml - alterar a tag <web-app> para
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+verificar qual foi a dynamic web module version e alterar na tag <web-app> neste caso foi a 5.0
+8.podemos criar um arquivo html no webapp e chamar ele como por ex
+http://localhost:8080/nomeDoProjeto/nomeArquivo.html
+9.olhar codigo para entender funcionamento e como montar.
