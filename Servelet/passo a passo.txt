@@ -12,3 +12,5 @@ verificar qual foi a dynamic web module version e alterar na tag <web-app> neste
 8.podemos criar um arquivo html no webapp e chamar ele como por ex
 http://localhost:8080/nomeDoProjeto/nomeArquivo.html
 9.olhar codigo para entender funcionamento e como montar.
+10.Expression Language
+11.JSTL - para isso importe o jar na pasta lib em webinf - biblioteca para ajudar na construção de páginas mais interativas com o java
