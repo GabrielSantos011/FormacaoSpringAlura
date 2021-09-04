@@ -1,31 +1,55 @@
 package br.com.alura.gerenciador.repository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import br.com.alura.gerenciador.model.Empresa;
 
 public class SimulaBancoDeDados {
 	
-	private static List<Empresa> empresas = new ArrayList<Empresa>();
+	private static List<Empresa> lista = new ArrayList<>();
+	private static Integer chaveSequencial = 1;
 	
 	static {
-		Empresa empresa1 = new Empresa();
-		empresa1.setNome("Alura");
-		
+		Empresa empresa = new Empresa();
+		empresa.setId(chaveSequencial++);
+		empresa.setNome("Alura");
 		Empresa empresa2 = new Empresa();
-		empresa2.setNome("Fatec");
-		
-		empresas.add(empresa1);
-		empresas.add(empresa2);
+		empresa2.setId(chaveSequencial++);
+		empresa2.setNome("Caelum");
+		lista.add(empresa);
+		lista.add(empresa2);
 	}
-	
-	public void adicionaEmpresa(Empresa empresa) {
-		empresas.add(empresa);
+
+	public void adiciona(Empresa empresa) {
+		empresa.setId(SimulaBancoDeDados.chaveSequencial++);
+		SimulaBancoDeDados.lista.add(empresa);
 	}
 	
 	public List<Empresa> getEmpresas(){
-		return SimulaBancoDeDados.empresas;
+		return SimulaBancoDeDados.lista;
 	}
 
+	public void removeEmpresa(Integer id) {
+		
+		Iterator<Empresa> it = lista.iterator();
+		
+		while(it.hasNext()) {
+			Empresa emp = it.next();
+			
+			if(emp.getId() == id) {
+				it.remove();
+			}
+		}
+	}
+
+	public Empresa buscaEmpresaPelaId(Integer id) {
+		for (Empresa empresa : lista) {
+			if(empresa.getId() == id) {
+				return empresa;
+			}
+		}
+		return null;
+	}
 }
