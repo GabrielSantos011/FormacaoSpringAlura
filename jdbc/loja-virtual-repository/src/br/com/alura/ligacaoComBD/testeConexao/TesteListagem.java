@@ -1,12 +1,14 @@
 package br.com.alura.ligacaoComBD.testeConexao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class TesteListagem {
     public static void main(String args[]) throws SQLException {
-        Connection conexao = DriverManager
-                .getConnection("jdbc:mysql://localhost/loja_virtual?userTimezone=true&serverTimezone=UTC",
-                        "root", "123456");
+        ConnectionFactory criaConexao = new ConnectionFactory();
+        Connection conexao = criaConexao.getConexao();
 
         //os comandos sql aqui no java são statements
         //logo precisamos criar um statement
