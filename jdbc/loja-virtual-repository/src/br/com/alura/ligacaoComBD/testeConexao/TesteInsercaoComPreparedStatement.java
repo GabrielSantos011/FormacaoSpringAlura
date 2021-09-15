@@ -13,6 +13,8 @@ public class TesteInsercaoComPreparedStatement {
     public static void main(String args[]) throws SQLException {
         ConnectionFactory criaConexao = new ConnectionFactory();
         Connection conexao = criaConexao.getConexao();
+        //tirando a responsabilidade do commit do jdbc
+        conexao.setAutoCommit(false);
 
         Scanner scan = new Scanner(System.in);
         System.out.println("digite o nome do produto:");
@@ -20,11 +22,27 @@ public class TesteInsercaoComPreparedStatement {
         System.out.println("digite a descrição do produto:");
         String descricao = scan.nextLine();
 
-        //passamos a query aqui agora e colocamos ? onde serão variávei que entrarão
-        PreparedStatement stm =
-                conexao.prepareStatement("INSERT INTO produto (nome, descricao) VALUES (?, ?)",
-                        PreparedStatement.RETURN_GENERATED_KEYS);
+        try {
+            //passamos a query aqui agora e colocamos ? onde serão variávei que entrarão
+            PreparedStatement stm =
+                    conexao.prepareStatement("INSERT INTO produto (nome, descricao) VALUES (?, ?)",
+                            PreparedStatement.RETURN_GENERATED_KEYS);
 
+            TesteInsercaoComPreparedStatement.adiciona(nome, descricao, stm);
+
+            //commitando pois tudi deu certo
+            conexao.commit();
+
+            conexao.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("efetuando rollback");
+            conexao.rollback();
+        }
+
+    }
+
+    private static void adiciona(String nome, String descricao,PreparedStatement stm) throws SQLException {
         //setando as variaveis no ?
         stm.setString(1,nome);
         stm.setString(2,descricao);
@@ -42,7 +60,5 @@ public class TesteInsercaoComPreparedStatement {
 
             System.out.println("O id gerado foi o " + id);
         }
-
-        conexao.close();
     }
 }
