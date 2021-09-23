@@ -1,5 +1,6 @@
 package br.com.alura.ligacaoComBD.testeConexao.quatro.dao;
 
+import br.com.alura.ligacaoComBD.testeConexao.quatro.model.Categoria;
 import br.com.alura.ligacaoComBD.testeConexao.quatro.model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,6 +66,33 @@ public class ProdutoDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException("Ocorreu um erro!");
+        }
+    }
+
+    public List<Produto> buscar(Categoria ct) throws SQLException {
+        List<Produto> produtos = new ArrayList<Produto>();
+
+        System.out.println("Executando a query de buscar produto por categoria");
+
+        String sql = "SELECT ID, NOME, DESCRICAO FROM PRODUTO WHERE CATEGORIA_ID = ?";
+
+        try(PreparedStatement pstm = conexao.prepareStatement(sql)) {
+            pstm.setInt(1, ct.getId());
+            pstm.execute();
+
+            trasformarResultSetEmProduto(produtos, pstm);
+        }
+        return produtos;
+    }
+
+    private void trasformarResultSetEmProduto(List<Produto> produtos, PreparedStatement pstm) throws SQLException {
+        try(ResultSet rst = pstm.getResultSet()) {
+            while(rst.next()) {
+                Produto produto =
+                        new Produto(rst.getInt(1), rst.getString(2), rst.getString(3));
+
+                produtos.add(produto);
+            }
         }
     }
 

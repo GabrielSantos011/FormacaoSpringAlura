@@ -6,6 +6,14 @@ public class Produto {
     private String nome;
     private String descricao;
 
+    public Produto() {}
+
+    public Produto(Integer id, String nome, String descricao) {
+        this.id = id;
+        this.nome = nome;
+        this. descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Produto\nid: " + id +"\nnome: " + nome;
