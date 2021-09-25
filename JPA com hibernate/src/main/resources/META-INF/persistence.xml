@@ -1,26 +1,33 @@
-<!--Arquivo de configuração de persistencia-->
-
-<!--Cabeçalho padrão-->
 <?xml version="1.0" encoding="UTF-8"?>
+<!--Arquivo de configuração de persistencia-->
+<!--Cabeçalho padrão-->
 <persistence version="2.2"
-    xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
-	<!--uma tag dessa para cada banco de dados que será utilizado-->
-	<!--O nome pode ser qualquer um mas colocamos o mesmo do projeto-->
-	<!--existem 2 tipos de transações, depois pesquisar melhor as diferenças, mas neste caso
-	escolhemos o RESOURCE_LOCAL-->
-	<persistence-unit name="loja" transaction-type="RESOURCE_LOCAL">
-		<!--Dentro da tag colocamos as propriedades da conexão-->
-        	<properties>
-			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:loja"/>
-			<property name="javax.persistence.jdbc.user" value="sa"/>
-			<property name="javax.persistence.jdbc.password" value=""/>
-			
-			<!--Propiedade específica do hibernate-->
-			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-        	</properties>
-	</persistence-unit>
+    <!--uma tag dessa para cada banco de dados que será utilizado-->
+    <!--O nome pode ser qualquer um mas colocamos o mesmo do projeto-->
+    <!--existem 2 tipos de transações, depois pesquisar melhor as diferenças, mas neste caso
+    escolhemos o RESOURCE_LOCAL-->
+    <persistence-unit name="loja" transaction-type="RESOURCE_LOCAL">
+        <!--Dentro da tag colocamos as propriedades da conexão-->
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:loja"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+
+            <!--Propiedade específica do hibernate-->
+            <!--o dialeto é para que o hibernate se adapte com as características
+            do bd colocado no value-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <!--Comando para mostrar os scripts sql executados-->
+            <property name="hibernate.show_sql" value="true"/>
+            <!--Comando para que seja criado as tabelasassim que a aplicação rode
+            Existem alguns comportamentos e eles variam conforme o value
+            temos create, create-drop, update e validate-->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
 </persistence>
