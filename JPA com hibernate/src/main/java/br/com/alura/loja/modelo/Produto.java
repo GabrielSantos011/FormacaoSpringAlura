@@ -2,6 +2,7 @@ package br.com.alura.loja.modelo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 //para dizermos a JPA que essa classe é uma tabela no banco de dados
 //usamos a notação @Entity com isso ela entende que é uma entidade do bd
@@ -25,6 +26,16 @@ public class Produto {
     private String nome;
     private String descricao;
     private BigDecimal preco;
+    private LocalDate dataCadastro = LocalDate.now();
+
+    //cada produto vai ter uma categoria que aqui no java é um Enum
+    //porém se eu não colocar notação nenhuma vai ficar por padrão
+    //@Enumerated(EnumType.ORDINAL) ou seja, pela sequencia
+    //que não é nada agradavel caso alguem altere essa sequencia
+    //no caso queremos que seja um varchar portanto colocamos o outro valor possível
+    //@Enumerated(EnumType.STRING) que vai colocar o nome da constante
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
     public Long getId() {
         return id;
@@ -53,4 +64,17 @@ public class Produto {
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
 }

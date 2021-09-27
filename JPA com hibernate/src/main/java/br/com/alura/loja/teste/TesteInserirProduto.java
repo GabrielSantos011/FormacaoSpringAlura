@@ -1,12 +1,11 @@
 package br.com.alura.loja.teste;
 
 import br.com.alura.loja.dao.ProdutoDao;
+import br.com.alura.loja.modelo.Categoria;
 import br.com.alura.loja.modelo.Produto;
 import br.com.alura.loja.util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.math.BigDecimal;
 
 public class TesteInserirProduto {
@@ -16,6 +15,7 @@ public class TesteInserirProduto {
         celular.setNome("Iphone XR");
         celular.setDescricao("Muito bom");
         celular.setPreco(new BigDecimal("2800"));
+        celular.setCategoria(Categoria.CELULAR);
 
         //sempre que quisermos fazer uma transação utilizaremos o EntityManager
         //para criar um EntityManager precisamos de um EntityManagerFactory - para criar
