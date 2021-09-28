@@ -1,9 +1,26 @@
 package br.com.alura.loja.modelo;
 
-public enum Categoria {
+import javax.persistence.*;
 
-    CELULAR,
-    INFORMATICA,
-    LIVRO;
+@Entity
+@Table(name = "categorias")
+public class Categoria {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
 }

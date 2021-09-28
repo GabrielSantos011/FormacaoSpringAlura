@@ -34,7 +34,13 @@ public class Produto {
     //que não é nada agradavel caso alguem altere essa sequencia
     //no caso queremos que seja um varchar portanto colocamos o outro valor possível
     //@Enumerated(EnumType.STRING) que vai colocar o nome da constante
-    @Enumerated(EnumType.STRING)
+    //obs1:atualização, Categoria deixou de ser um enum e passou a ser uma classe
+    //também com a notação @entity, a partir deste momento a JPA identifica que é um relacionamento
+    //porém ela não tem um valor padrão, ou seja, precisamos passar a cardinalidade através de notações
+    //temos @OneToOne, @ManyToOne, @OneToMany e @ManyToMany
+    //neste caso usaremos o @ManyToOne pois um produto só pode ter uma categoria,
+    //mas a categoria pode ter vários produtos
+    @ManyToOne
     private Categoria categoria;
 
     public Long getId() {
