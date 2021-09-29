@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "produtos")
 public class Produto {
+    //JPA exige que tenha construtor padrão pada dar o select, neste caso está implícito
+
     //os atributos já são entendidos como colunas no bd, mas caso precise que na tabela
     // seja um nome diferente em algum atributo utilizamos a notação @Column(name = "nome_no_bd")
 

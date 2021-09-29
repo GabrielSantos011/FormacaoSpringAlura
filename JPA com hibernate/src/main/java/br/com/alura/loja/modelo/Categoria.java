@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "categorias")
 public class Categoria {
-
+//JPA exige que tenha construtor padrão pada dar o select, neste caso está implícito
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
