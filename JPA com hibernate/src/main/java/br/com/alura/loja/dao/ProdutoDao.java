@@ -13,7 +13,16 @@ public class ProdutoDao {
     }
 
     public void cadastrar(Produto produto) {
-        em.persist(produto);
+        this.em.persist(produto);
+    }
+
+    public void atualizar(Produto produto) {
+        this.em.merge(produto);
+    }
+
+    public void remover(Produto produto) {
+        this.em.merge(produto);//garantindo que está em managed
+        this.em.remove(produto);
     }
 
 }
