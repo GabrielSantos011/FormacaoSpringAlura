@@ -31,12 +31,21 @@ public class TesteConsulta {
         produtoDao.cadastrar(celular);
 
         Produto p = produtoDao.buscarPorId(1l);
-        List<Produto> produtos = produtoDao.buscarTodos();
-        em.close();
+        System.out.println(p.getNome());
 
+        List<Produto> produtos = produtoDao.buscarTodos();
         produtos.forEach((p2)-> System.out.println(p.getNome()));
 
-        System.out.println(p.getNome());
+        produtos = produtoDao.buscarPorNomeDaCategoria("celulares");
+        produtos.forEach((p2)-> System.out.println(p.getNome()));
+
+        produtos = produtoDao.buscarPorNome("Iphone XR");
+        produtos.forEach((p2)-> System.out.println(p.getNome()));
+
+        BigDecimal precoDoProduto = produtoDao.buscarPrecoDoProduto(p.getNome());
+        System.out.println(precoDoProduto);
+
+        em.close();
     }
 
 }

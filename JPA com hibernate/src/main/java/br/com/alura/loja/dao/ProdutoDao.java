@@ -3,6 +3,7 @@ package br.com.alura.loja.dao;
 import br.com.alura.loja.modelo.Produto;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProdutoDao {
@@ -28,6 +29,28 @@ public class ProdutoDao {
         //O createQuery apenas monta a query sendo necesaário chamar o
         //getResultList para devolver uma lista
         return this.em.createQuery(jpql, Produto.class).getResultList();
+    }
+
+    public List<Produto> buscarPorNome(String nome) {
+        String jpql = "SELECT p FROM Produto p WHERE p.nome = :nome";
+        return this.em.createQuery(jpql, Produto.class)
+                .setParameter("nome", nome)
+                .getResultList();
+    }
+
+    public List<Produto> buscarPorNomeDaCategoria(String nome) {
+        String jpql = "SELECT p FROM Produto p WHERE p.categoria.nome = ?1";
+        return this.em.createQuery(jpql, Produto.class)
+                .setParameter(1, nome)
+                .getResultList();
+    }
+
+    //buscar um único parametro
+    public BigDecimal buscarPrecoDoProduto(String nome) {
+        String jpql = "SELECT p.preco FROM Produto p WHERE p.nome = ?1";
+        return this.em.createQuery(jpql, BigDecimal.class)
+                .setParameter(1, nome)
+                .getSingleResult();
     }
 
     public void cadastrar(Produto produto) {
